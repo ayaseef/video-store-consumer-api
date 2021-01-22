@@ -21,6 +21,22 @@ class VideosController < ApplicationController
       )
   end
 
+  def create
+    video = Video.new(
+      title: params[:title],
+      overview: params[:overview],
+      # release_date: params[:release_date],
+      # image_url: params[:image_url],
+      # inventory: 1,
+      # external_id: params[:external_id]
+    )
+    if video.save
+      render status: :ok, json: videos
+    else
+      render status: :bad_request, json: { errors: rentals.errors.messages }
+    end
+  end
+
   private
 
   def require_video
